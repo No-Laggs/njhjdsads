@@ -46,7 +46,7 @@ emojiSpinner.TextColor3 = Color3.new(1, 1, 1)
 emojiSpinner.ZIndex = 4
 emojiSpinner.Text = "🔁"
 
--- Smooth spin with TweenService
+-- Smooth spin
 local spinnerRotation = Instance.new("NumberValue")
 spinnerRotation.Value = 0
 
@@ -61,7 +61,7 @@ local spinTween = TweenService:Create(
 )
 spinTween:Play()
 
--- Animated dots under spinner
+-- ✅ Static dots under spinner
 local dotsLabel = Instance.new("TextLabel", frame)
 dotsLabel.Size = UDim2.new(0.2, 0, 0.1, 0)
 dotsLabel.Position = UDim2.new(0.5, 0, 0.55, 0)
@@ -71,17 +71,7 @@ dotsLabel.Font = Enum.Font.GothamBold
 dotsLabel.TextScaled = true
 dotsLabel.TextColor3 = Color3.new(1, 1, 1)
 dotsLabel.ZIndex = 4
-dotsLabel.Text = ""
-
-task.spawn(function()
-	local maxDots = 4
-	while dotsLabel and dotsLabel.Parent do
-		for i = 1, maxDots do
-			dotsLabel.Text = string.rep(".", i)
-			task.wait(0.3)
-		end
-	end
-end)
+dotsLabel.Text = "....." -- Static, no animation!
 
 -- ✅ NEW loadstring URL
 task.spawn(function()
